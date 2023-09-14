@@ -10,29 +10,39 @@
     <title>Cadastro</title>
   </head>
   <body>
+    <?php
+    include "conexao.php";
+    $id = $_GET['id'] ?? '';
+    $sql = "SELECT * FROM pessoas WHERE idPessoa = $id";
+
+    $dados = mysqli_query($conn, $sql);
+    $linha = mysqli_fetch_assoc($dados);
+    
+    ?>
     <div class="Container">
         <div class="row">
             <div class="col">  
-            <h1>Cadastro dos Estudantes para Cibersegurança</h1>
-            <form action="cadastro.php" method="POST">
+            <h1>Alteração de Cadastro</h1>
+            <form action="edit_script.php" method="POST">
                 <div class="form-group">
                     <label for="nome">Nome completo:</label>
-                    <input type="text" class="form-control" placeholder="Seu nome aqui" name="nome" required>
+                    <input type="text" class="form-control" placeholder="Seu nome aqui" name="nome" required value="<?php echo $linha['nome']; ?>">
                 </div>
                 <div class="form-group">
                     <label for="email">Enderaço de Email:</label>
-                    <input type="email" class="form-control" placeholder="Seu email aqui" name="email" required>
+                    <input type="email" class="form-control" placeholder="Seu email aqui" name="email" required value="<?php echo $linha['email']; ?>">
                 </div>
                 <div class="form-group">
                     <label for="telefone">Telefone:</label>
-                    <input type="telefone" class="form-control" placeholder="Seu telefone aqui" name="telefone" required>
+                    <input type="telefone" class="form-control" placeholder="Seu telefone aqui" name="telefone" required value="<?php echo $linha['telefone']; ?>">
                 </div>  
                 <div class="form-group">
                     <label for="nome">Data de nascimento:</label>
-                    <input type="date" class="form-control" placeholder="Sua data aqui" name="nascimento" required>
+                    <input type="date" class="form-control" placeholder="Sua data aqui" name="nascimento" required value="<?php echo $linha['nascimento']; ?>">
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-success" name="button">
+                    <input type="submit" class="btn btn-success" name="button" value="Salvar alterações">
+                    <input type="hidden" name="id" value="<?php echo $linha['idPessoa']; ?>">
                 </div>
             </form>
             <a href="index.php" class="btn btn-info">Voltar</a>
