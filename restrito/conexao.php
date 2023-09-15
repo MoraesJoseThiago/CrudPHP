@@ -21,4 +21,10 @@
         return $escreve;
     }
 
+
+    function clear($conexao, $texto_puro){
+        $texto = mysqli_real_escape_string($conexao, $texto_puro);
+        $texto = htmlspecialchars($texto);
+        return $texto;
+    }
 ?>

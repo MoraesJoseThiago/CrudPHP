@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -7,27 +8,28 @@
 
     <!-- Bootstrap CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <title>Alteração de Cadastro</title>
+    <title>Cadastro</title>
   </head>
   <body>
     <div class="container">
         <div class=row>
             <?php
-                include "conexao.php";
-                $id = $_POST['id'];
-                $nome = $_POST['nome'];
-
-                $sql = "DELETE FROM `pessoas` WHERE idPessoa = $id";
-
+                include "conexao.php"; 
+                $nome = clear($_POST['nome']);
+                $email = clear($_POST['email']);
+                $telefone = clear($_POST['telefone']);
+                $nascimento = clear($_POST['nascimento']);
+                $sql = "INSERT INTO `pessoas` (`nome`, `email`, `telefone`, `nascimento`) VALUES 
+                ('$nome','$email','$telefone','$nascimento')";
 
                if (mysqli_query($conn, $sql)){
-                    mensagem("$nome excluido com sucesso", 'success');
+                    mensagem("$nome Sucesso", 'success');
                } else {
-                    mensagem("$nome não excluido", 'danger');
+                    mensagem("$nome ERRORRR", 'danger');
               } 
               
           ?>
-            <a href="http://localhost/CrudPHP/login.php">Voltar</a> 
+            <a href="http://localhost/CrudPHP/restrito/login.php">Voltar</a> 
         </div>
     </div>
 
